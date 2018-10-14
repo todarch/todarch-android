@@ -13,19 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch
+package com.projects.android.todarch.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.projects.android.todarch.databinding.FragmentTodoListBinding
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 13.10.2018.
+ * @since 14.10.2018.
  */
-class MainActivity : AppCompatActivity() {
+class TodoListFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = FragmentTodoListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }
