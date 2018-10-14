@@ -25,7 +25,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resValue "string", "app_name", "Todarch"
     }
 
@@ -61,12 +61,47 @@ android {
     }
 }
 
+ext {
+    supportLibrary = "1.0.0"
+    navigation = "1.0.0-alpha06"
+    aac = "2.0.0"
+    room = "2.1.0-alpha01"
+    dagger = "2.16"
+    retrofit = "2.3.0"
+}
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    // Support
+    implementation "androidx.appcompat:appcompat:${supportLibrary}"
+    implementation "androidx.annotation:annotation:${supportLibrary}"
+    implementation "com.google.android.material:material:${supportLibrary}"
+    implementation "androidx.recyclerview:recyclerview:${supportLibrary}"
+    implementation "androidx.cardview:cardview:${supportLibrary}"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+
+    implementation "android.arch.navigation:navigation-fragment-ktx:${navigation}"
+    implementation "android.arch.navigation:navigation-ui-ktx:${navigation}"
+
+    // Android Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:${aac}"
+    implementation "androidx.lifecycle:lifecycle-runtime:${aac}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${aac}"
+
+    // Room components
+    implementation "androidx.room:room-runtime:${room}"
+    kapt "androidx.room:room-compiler:${room}"
+    androidTestImplementation "androidx.room:room-testing:${room}"
+
+    // Network
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+    // Test
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
 }
