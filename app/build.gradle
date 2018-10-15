@@ -81,6 +81,7 @@ dependencies {
     implementation "androidx.cardview:cardview:${supportLibrary}"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
 
+    // Navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:${navigation}"
     implementation "android.arch.navigation:navigation-ui-ktx:${navigation}"
 
