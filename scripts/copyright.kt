@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Todarch
+ * Copyright $YEAR Todarch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch
-
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-
-/**
- * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 13.10.2018.
- */
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-}
