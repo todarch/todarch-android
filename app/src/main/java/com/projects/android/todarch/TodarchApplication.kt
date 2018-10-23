@@ -15,29 +15,49 @@
  */
 package com.projects.android.todarch
 
-import android.app.Application
 import android.os.StrictMode
+import com.projects.android.todarch.core.dagger.CoreComponent
+import com.projects.android.todarch.core.dagger.DaggerCoreComponent
+import com.projects.android.todarch.dagger.DaggerSingletonComponent
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 14.10.2018.
  */
-class TodarchApplication : Application() {
+class TodarchApplication : DaggerApplication() {
+
+    private val coreComponent: CoreComponent by lazy {
+        DaggerCoreComponent
+            .builder()
+            .build()
+    }
 
     override fun onCreate() {
         if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+            StrictMode.setThreadPolicy(
+                StrictMode.ThreadPolicy.Builder()
                     .detectDiskReads()
                     .detectDiskWrites()
                     .detectAll()
                     .penaltyLog()
-                    .build())
-            StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
+                    .build()
+            )
+            StrictMode.setVmPolicy(
+                StrictMode.VmPolicy.Builder()
                     .detectLeakedSqlLiteObjects()
                     .detectLeakedClosableObjects()
                     .penaltyLog()
-                    .build())
+                    .build()
+            )
         }
         super.onCreate()
+    }
+
+    override fun applicationInjector(): AndroidInjector<out TodarchApplication> {
+        return DaggerSingletonComponent.builder()
+            .coreComponent(coreComponent)
+            .create(this)
     }
 }

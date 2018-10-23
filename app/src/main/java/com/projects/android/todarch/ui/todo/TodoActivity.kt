@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.ui
+package com.projects.android.todarch.ui.todo
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.projects.android.todarch.R
 import com.projects.android.todarch.databinding.ActivityTodoBinding
+import dagger.android.support.DaggerAppCompatActivity
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 13.10.2018.
  */
-class TodoActivity : AppCompatActivity() {
+class TodoActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityTodoBinding = DataBindingUtil.setContentView(this,
-                R.layout.activity_todo)
-
+        val binding: ActivityTodoBinding = DataBindingUtil.setContentView(this, R.layout.activity_todo)
         val navController = Navigation.findNavController(this, R.id.todo_nav_fragment)
 
         // Set up ActionBar
