@@ -50,11 +50,13 @@ allprojects {
     }
 }
 
-apply plugin: 'com.diffplug.gradle.spotless'
-spotless {
-    kotlin {
-        target '**/*.kt'
-        ktlint(versions.ktlint)
-        licenseHeaderFile(project.rootProject.file('scripts/copyright.kt'), '^(package|//startfile)')
+subprojects {
+    apply plugin: 'com.diffplug.gradle.spotless'
+    spotless {
+        kotlin {
+            target "**/*.kt"
+            ktlint(versions.ktlint)
+            licenseHeaderFile(project.rootProject.file('scripts/copyright.kt'), '^(package|//startfile)')
+        }
     }
 }
