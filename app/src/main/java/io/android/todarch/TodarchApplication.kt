@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch
+package io.android.todarch
 
 import android.os.StrictMode
-import com.projects.android.todarch.core.dagger.CoreComponent
-import com.projects.android.todarch.core.dagger.DaggerCoreComponent
-import com.projects.android.todarch.dagger.DaggerSingletonComponent
+import io.android.todarch.core.dagger.CoreComponent
+import io.android.todarch.core.dagger.DaggerCoreComponent
+import io.android.todarch.dagger.DaggerSingletonComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 

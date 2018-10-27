@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/todo_list_fragment"
-        android:name="com.projects.android.todarch.ui.todo.TodoListFragment"
+        android:name="io.android.todarch.ui.todo.TodoListFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_todo_list"/>
 

@@ -13,20 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.core.dagger
+package io.android.todarch.ui.todo
 
-import dagger.Component
+import android.content.Context
+import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 21.10.2018.
  */
-@Component
-// TODO: add common modules: e.g. SharedPrefModules
-interface CoreComponent {
-
-    @Component.Builder
-    interface Builder {
-        fun build(): CoreComponent
-    }
-}
+class TodoViewModel @Inject constructor(val context: Context) : ViewModel()

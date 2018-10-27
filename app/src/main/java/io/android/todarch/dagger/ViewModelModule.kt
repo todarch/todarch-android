@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.dagger
+package io.android.todarch.dagger
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.projects.android.todarch.core.dagger.TodarchViewModelFactory
-import com.projects.android.todarch.core.dagger.ViewModelKey
-import com.projects.android.todarch.ui.todo.TodoViewModel
+import io.android.todarch.core.dagger.TodarchViewModelFactory
+import io.android.todarch.core.dagger.ViewModelKey
+import io.android.todarch.ui.todo.TodoViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

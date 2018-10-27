@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.core.base
+package io.android.todarch.core.dagger
 
-import android.annotation.SuppressLint
-import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Scope
+import kotlin.annotation.AnnotationRetention.RUNTIME
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 21.10.2018.
  */
-@SuppressLint("Registered")
-open class BaseActivity : DaggerAppCompatActivity()
+@Scope
+@Retention(RUNTIME)
+annotation class ScopeActivity

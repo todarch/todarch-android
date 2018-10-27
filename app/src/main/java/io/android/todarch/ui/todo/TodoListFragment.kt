@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.ui.todo
+package io.android.todarch.ui.todo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,9 +21,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.projects.android.todarch.R
-import com.projects.android.todarch.core.base.BaseFragment
-import com.projects.android.todarch.databinding.FragmentTodoListBinding
+import io.android.todarch.R
+import io.android.todarch.core.base.BaseFragment
+import io.android.todarch.databinding.FragmentTodoListBinding
 import javax.inject.Inject
 
 /**

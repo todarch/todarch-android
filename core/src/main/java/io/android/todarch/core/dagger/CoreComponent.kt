@@ -13,12 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.core.base
+package io.android.todarch.core.dagger
 
-import dagger.android.support.DaggerFragment
+import dagger.Component
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 15.10.2018.
+ * @since 21.10.2018.
  */
-open class BaseFragment : DaggerFragment()
+@Component
+// TODO: add common modules: e.g. SharedPrefModules
+interface CoreComponent {
+
+    @Component.Builder
+    interface Builder {
+        fun build(): CoreComponent
+    }
+}

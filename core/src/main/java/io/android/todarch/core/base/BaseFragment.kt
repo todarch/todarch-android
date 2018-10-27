@@ -13,24 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.dagger
+package io.android.todarch.core.base
 
-import android.content.Context
-import com.projects.android.todarch.TodarchApplication
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import dagger.android.support.DaggerFragment
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 21.10.2018.
+ * @since 15.10.2018.
  */
-@Module(includes = [ViewModelModule::class])
-class SingletonModule {
-
-    @Provides
-    @Singleton
-    internal fun provideContext(application: TodarchApplication): Context {
-        return application
-    }
-}
+open class BaseFragment : DaggerFragment()

@@ -13,19 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.ui.todo
+package io.android.todarch.core.dagger
 
-import com.projects.android.todarch.core.dagger.ScopeFragment
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import androidx.lifecycle.ViewModel
+import dagger.MapKey
+import kotlin.reflect.KClass
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 21.10.2018.
+ * @see <a href="https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/di/ViewModelKey.kt">ViewModelKey</a>
  */
-@Module
-abstract class TodoActivityFragmentBuildersModule {
-    @ScopeFragment
-    @ContributesAndroidInjector
-    internal abstract fun bindTodoListFragment(): TodoListFragment
-}
+@MustBeDocumented
+@Target(
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.PROPERTY_SETTER
+)
+@Retention(AnnotationRetention.RUNTIME)
+@MapKey
+annotation class ViewModelKey(val value: KClass<out ViewModel>)

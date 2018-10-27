@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.dagger
+package io.android.todarch.dagger
 
-import com.projects.android.todarch.core.dagger.ScopeActivity
-import com.projects.android.todarch.ui.todo.TodoActivity
-import com.projects.android.todarch.ui.todo.TodoActivityFragmentBuildersModule
+import android.content.Context
+import io.android.todarch.TodarchApplication
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 21.10.2018.
  */
-@Module
-abstract class ActivityBuilder {
+@Module(includes = [ViewModelModule::class])
+class SingletonModule {
 
-    @ScopeActivity
-    @ContributesAndroidInjector(modules = [TodoActivityFragmentBuildersModule::class])
-    internal abstract fun bindTodoActivity(): TodoActivity
+    @Provides
+    @Singleton
+    internal fun provideContext(application: TodarchApplication): Context {
+        return application
+    }
 }

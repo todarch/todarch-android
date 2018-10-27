@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.ui.todo
+package io.android.todarch.ui.todo
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.projects.android.todarch.R
-import com.projects.android.todarch.databinding.ActivityTodoBinding
+import io.android.todarch.R
+import io.android.todarch.databinding.ActivityTodoBinding
 import dagger.android.support.DaggerAppCompatActivity
 
 /**

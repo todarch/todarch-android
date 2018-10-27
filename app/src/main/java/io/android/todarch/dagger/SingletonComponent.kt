@@ -1,7 +1,7 @@
-package com.projects.android.todarch.dagger
+package io.android.todarch.dagger
 
-import com.projects.android.todarch.TodarchApplication
-import com.projects.android.todarch.core.dagger.CoreComponent
+import io.android.todarch.TodarchApplication
+import io.android.todarch.core.dagger.CoreComponent
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
