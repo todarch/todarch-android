@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -17,20 +17,16 @@ android {
     testBuildType "debug"
 
     defaultConfig {
-        applicationId "io.android.todarch"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode 1
-        versionName "1.0.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resValue "string", "app_name", "Todarch"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         debug {
             debuggable true
             testCoverageEnabled true
-            applicationIdSuffix ".test"
         }
         release {
             debuggable false
@@ -44,8 +40,6 @@ android {
     productFlavors {
         dev {
             dimension "default"
-            applicationIdSuffix ".dev"
-            resValue "string", "app_name", "Todarch Test"
         }
         prod {
             dimension "default"
@@ -60,11 +54,10 @@ android {
 
 dependencies {
     implementation project(':core')
-    implementation project(':user')
+    implementation "androidx.appcompat:appcompat:${versions.androidx}"
 
-    // Dagger
-    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-
-    // Dagger.Android
-    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+    // Test
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test:runner:${versions.test_runner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.test_espresso}"
 }
