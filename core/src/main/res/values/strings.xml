@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ADD_TODO -->
     <string name="add_todo">add todo</string>
+
+    <!-- LOGIN -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="error_invalid_email">Please enter a valid e-mail.</string>
+    <string name="error_invalid_password">Please enter a valid password.</string>
 </resources>
