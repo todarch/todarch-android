@@ -15,11 +15,13 @@
  */
 package io.android.todarch.dagger
 
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 import io.android.todarch.core.dagger.ScopeActivity
 import io.android.todarch.ui.todo.TodoActivity
 import io.android.todarch.ui.todo.TodoActivityFragmentBuildersModule
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import io.android.todarch.user.UserManagementActivity
+import io.android.todarch.user.UserManagementActivityFragmentBuildersModule
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
@@ -31,4 +33,8 @@ abstract class ActivityBuilder {
     @ScopeActivity
     @ContributesAndroidInjector(modules = [TodoActivityFragmentBuildersModule::class])
     internal abstract fun bindTodoActivity(): TodoActivity
+
+    @ScopeActivity
+    @ContributesAndroidInjector(modules = [UserManagementActivityFragmentBuildersModule::class])
+    internal abstract fun bindUserManagementActivity(): UserManagementActivity
 }

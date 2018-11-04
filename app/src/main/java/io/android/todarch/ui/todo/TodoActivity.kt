@@ -15,13 +15,15 @@
  */
 package io.android.todarch.ui.todo
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import dagger.android.support.DaggerAppCompatActivity
 import io.android.todarch.R
 import io.android.todarch.databinding.ActivityTodoBinding
-import dagger.android.support.DaggerAppCompatActivity
+import io.android.todarch.user.UserManagementActivity
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
@@ -37,5 +39,24 @@ class TodoActivity : DaggerAppCompatActivity() {
         // Set up ActionBar
         setSupportActionBar(binding.toolbar)
         NavigationUI.setupActionBarWithNavController(this, navController)
+
+        if (savedInstanceState == null) {
+            // TODO savedInstanceState check is for testing purpose, remove it and add user logged in check
+            startActivityForResult(UserManagementActivity.newIntent(this), REQUEST_CODE_LOGIN)
+            overridePendingTransition(0, 0) // Disable activity animation
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_LOGIN) {
+            if (resultCode == RESULT_OK) {
+                // TODO trigger user related ui info update
+            }
+        }
+    }
+
+    companion object {
+        const val REQUEST_CODE_LOGIN = 0x1
     }
 }

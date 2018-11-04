@@ -23,6 +23,7 @@ import io.android.todarch.ui.todo.TodoViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import io.android.todarch.user.UserViewModel
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
@@ -34,6 +35,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TodoViewModel::class)
     internal abstract fun bindTodoViewModel(todoViewModel: TodoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserViewModel::class)
+    internal abstract fun bindUserViewModel(userViewModel: UserViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(viewModelFactory: TodarchViewModelFactory): ViewModelProvider.Factory

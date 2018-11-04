@@ -23,38 +23,26 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        debug {
-            debuggable true
-            testCoverageEnabled true
-        }
-        release {
-            debuggable false
-            zipAlignEnabled true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    flavorDimensions "default"
-    productFlavors {
-        dev {
-            dimension "default"
-        }
-        prod {
-            dimension "default"
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-    implementation project(':core')
+    api project(':core')
+
     implementation "androidx.appcompat:appcompat:${versions.androidx}"
+
+    // Dagger
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // Dagger.Android
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
     // Test
     testImplementation "junit:junit:${versions.junit}"
