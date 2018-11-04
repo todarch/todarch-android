@@ -87,12 +87,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.test_espresso}"
 }
 
-kotlin {
-    experimental {
-        coroutines 'enable'
-    }
-}
-
 androidExtensions {
     experimental = true
 }
