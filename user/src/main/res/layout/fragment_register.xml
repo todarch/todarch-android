@@ -36,28 +36,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/login"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_size"
-            android:text="@string/login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/or"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_size"
-            android:text="@string/or"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login"/>
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/register"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
@@ -66,6 +44,6 @@
             android:text="@string/register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/or"/>
+            app:layout_constraintTop_toBottomOf="@+id/password"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
