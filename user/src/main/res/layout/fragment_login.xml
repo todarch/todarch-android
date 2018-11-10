@@ -15,6 +15,7 @@
             app:layout_constraintBottom_toTopOf="@+id/password">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_email"
                 style="@style/Text.Form.Email"
                 android:hint="@string/email"
                 android:imeOptions="actionNext"/>
@@ -29,6 +30,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_password"
                 style="@style/Text.Form.Password"
                 android:hint="@string/password"
                 android:imeOptions="actionDone"/>
@@ -36,13 +38,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/login"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/register"
+            style="@style/Button.Form"
             android:layout_marginTop="@dimen/large_size"
-            android:text="@string/login"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/register"
+            app:layout_constraintEnd_toStartOf="@+id/or"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password"/>
 
@@ -53,19 +53,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_size"
             android:text="@string/or"
+            app:layout_constraintBaseline_toBaselineOf="@+id/register"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/register"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/login"
+            style="@style/Button.Form"
             android:layout_marginTop="@dimen/large_size"
-            android:text="@string/register"
+            android:text="@string/login"
+            app:layout_constraintBaseline_toBaselineOf="@+id/register"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/or"/>
+            app:layout_constraintStart_toEndOf="@+id/or"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
