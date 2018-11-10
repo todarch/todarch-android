@@ -23,7 +23,6 @@ import dagger.multibindings.IntoMap
 import io.android.todarch.core.dagger.TodarchViewModelFactory
 import io.android.todarch.core.dagger.ViewModelKey
 import io.android.todarch.ui.todo.TodoViewModel
-import io.android.todarch.user.ui.UserViewModel
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
