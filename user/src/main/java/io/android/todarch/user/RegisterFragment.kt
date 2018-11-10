@@ -41,17 +41,22 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.register.setOnClickListener(this)
+        binding.toolbar.back.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
+        val navController = this@RegisterFragment.findNavController()
         when (v?.id) {
             R.id.register -> {
                 val email = binding.email.editText?.text?.trim()?.toString()
                 val password = binding.password.editText?.text?.toString()
                 if (validateInputs(email, password)) {
                     // TODO register user
-                    this@RegisterFragment.findNavController().navigateUp()
+                    navController.navigateUp()
                 }
+            }
+            R.id.back -> {
+                navController.navigateUp()
             }
         }
     }
