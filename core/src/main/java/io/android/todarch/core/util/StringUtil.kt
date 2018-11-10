@@ -21,6 +21,7 @@ import androidx.annotation.AnyRes
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 10.11.2018.
+ * @see <a href="https://gist.github.com/pablisco/da25563d57559dd1d18f165272269b57">Extending Resources</a>
  */
 
 val Context.strings
