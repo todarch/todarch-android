@@ -13,13 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.core.base
+package io.android.todarch.core.util
 
-import dagger.android.support.DaggerFragment
-import io.android.todarch.core.util.ContextAware
+import android.content.Context
+import androidx.annotation.AnyRes
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 15.10.2018.
+ * @since 10.11.2018.
  */
-open class BaseFragment : DaggerFragment(), ContextAware
+
+val Context.strings
+    get() = ResourceMapper { getString(it) }
+
+val ContextAware.strings
+    get() = getContext()?.strings
+
+class ResourceMapper<out T>(private val mapRes: (resId: Int) -> T) {
+    operator fun get(@AnyRes resId: Int) = mapRes(resId)
+}
+
+interface ContextAware {
+    fun getContext(): Context?
+}

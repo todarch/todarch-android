@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import io.android.todarch.core.base.BaseFragment
 import io.android.todarch.core.util.isValidEmail
+import io.android.todarch.core.util.strings
 import io.android.todarch.user.R
 import io.android.todarch.user.databinding.FragmentLoginBinding
 import javax.inject.Inject
@@ -67,12 +68,12 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         binding.password.isErrorEnabled = false
 
         if (!email.isValidEmail()) {
-            binding.email.error = context?.resources?.getString(R.string.error_invalid_email)
+            binding.email.error = strings?.get(R.string.error_invalid_email)
             binding.email.isErrorEnabled = true
             return false
         }
         if (password.isNullOrEmpty()) {
-            binding.password.error = context?.resources?.getString(R.string.error_invalid_password)
+            binding.password.error = strings?.get(R.string.error_invalid_password)
             binding.password.isErrorEnabled = true
             return false
         }
