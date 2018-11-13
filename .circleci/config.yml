@@ -8,7 +8,7 @@ jobs:
     working_directory: ~/todarch-android
 
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: circleci/android:api-28-alpha
 
     environment:
       ANDROID_HOME: /opt/android/sdk
@@ -17,9 +17,17 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Ensure Checksum Script Has Permission
+          command: chmod +x .circleci/ci-scripts/checksum.sh
+
+      - run:
+          name: Generate cache key
+          command: .circleci/ci-scripts/checksum.sh /tmp/checksum.txt
+
       # Restore cached dependencies (if any)
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: gradle-{{ checksum "/tmp/checksum.txt" }}
 
       # Prepare the container for the build
       #- run:
@@ -55,7 +63,7 @@ jobs:
 
             # Gradle dependencies
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: gradle-{{ checksum "/tmp/checksum.txt" }}
 
       - run:
           name: Run Tests

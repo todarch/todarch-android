@@ -1,0 +1,98 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    lintOptions {
+        abortOnError false
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            zipAlignEnabled true
+            minifyEnabled true
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // Support
+    api "androidx.appcompat:appcompat:${versions.androidx}"
+    api "androidx.annotation:annotation:${versions.androidx}"
+    api "androidx.recyclerview:recyclerview:${versions.androidx}"
+    api "androidx.cardview:cardview:${versions.androidx}"
+    api "com.google.android.material:material:${versions.material}"
+    api "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
+    api "androidx.core:core-ktx:${versions.coreKtx}"
+
+    // Kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
+
+    // Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+
+    // Navigation
+    api "android.arch.navigation:navigation-fragment-ktx:${versions.navigation}"
+    api "android.arch.navigation:navigation-ui-ktx:${versions.navigation}"
+
+    // Android Architecture Components
+    api "androidx.lifecycle:lifecycle-extensions:${versions.androidx_lifecycle}"
+    api "androidx.lifecycle:lifecycle-runtime:${versions.androidx_lifecycle}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${versions.androidx_lifecycle}"
+
+    // Room components
+    api "androidx.room:room-runtime:${versions.room}"
+    kapt "androidx.room:room-compiler:${versions.room}"
+    androidTestImplementation "androidx.room:room-testing:${versions.room}"
+
+    // Dagger
+    api "com.google.dagger:dagger:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // Dagger.Android
+    api "com.google.dagger:dagger-android-support:${versions.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+
+    // Network
+    api "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    api "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}"
+    api "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
+
+    // Test
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test:runner:${versions.test_runner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.test_espresso}"
+}
+
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
