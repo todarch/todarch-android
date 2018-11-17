@@ -17,7 +17,7 @@ android {
     testBuildType "debug"
 
     defaultConfig {
-        applicationId "com.projects.android.todarch"
+        applicationId "io.android.todarch"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode 1
@@ -59,7 +59,8 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
+    api project(':core')
+    implementation project(':user')
 
     // Dagger
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"

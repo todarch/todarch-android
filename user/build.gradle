@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    lintOptions {
+        abortOnError false
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    testBuildType "debug"
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api project(':core')
+
+    implementation "androidx.appcompat:appcompat:${versions.androidx}"
+
+    // Dagger
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // Dagger.Android
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+
+    // Test
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test:runner:${versions.test_runner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.test_espresso}"
+}

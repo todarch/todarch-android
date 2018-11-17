@@ -18,12 +18,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            app:startDestination="@+id/todo_list_fragment">
+            app:startDestination="@+id/login_fragment">
 
     <fragment
-        android:id="@+id/todo_list_fragment"
-        android:name="io.android.todarch.ui.todo.TodoListFragment"
-        android:label="@string/app_name"
-        tools:layout="@layout/fragment_todo_list"/>
+        android:id="@+id/login_fragment"
+        android:name="io.android.todarch.user.LoginFragment"
+        tools:layout="@layout/fragment_login"/>
 
 </navigation>
