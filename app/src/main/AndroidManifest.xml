@@ -29,7 +29,7 @@
 
         <activity
             android:id="@+id/userManagementActivity"
-            android:name="io.android.todarch.user.UserManagementActivity"
+            android:name="io.android.todarch.user.ui.UserManagementActivity"
             android:launchMode="singleTop"
             android:parentActivityName="io.android.todarch.ui.todo.TodoActivity"
             android:theme="@style/AppTheme.NoActionBar"/>

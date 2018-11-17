@@ -23,7 +23,7 @@ import androidx.navigation.ui.NavigationUI
 import dagger.android.support.DaggerAppCompatActivity
 import io.android.todarch.R
 import io.android.todarch.databinding.ActivityTodoBinding
-import io.android.todarch.user.UserManagementActivity
+import io.android.todarch.user.ui.UserManagementActivity
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>

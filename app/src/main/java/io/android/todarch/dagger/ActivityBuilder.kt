@@ -20,8 +20,8 @@ import dagger.android.ContributesAndroidInjector
 import io.android.todarch.core.dagger.ScopeActivity
 import io.android.todarch.ui.todo.TodoActivity
 import io.android.todarch.ui.todo.TodoActivityFragmentBuildersModule
-import io.android.todarch.user.UserManagementActivity
-import io.android.todarch.user.UserManagementActivityFragmentBuildersModule
+import io.android.todarch.user.ui.UserManagementActivity
+import io.android.todarch.user.dagger.UserManagementActivityFragmentBuildersModule
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
