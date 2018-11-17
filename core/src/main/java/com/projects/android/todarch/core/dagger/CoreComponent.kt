@@ -13,23 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.projects.android.todarch.ui
+package com.projects.android.todarch.core.dagger
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.projects.android.todarch.databinding.FragmentTodoListBinding
+import dagger.Component
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 14.10.2018.
+ * @since 21.10.2018.
  */
-class TodoListFragment : Fragment() {
+@Component
+// TODO: add common modules: e.g. SharedPrefModules
+interface CoreComponent {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentTodoListBinding.inflate(inflater, container, false)
-        return binding.root
+    @Component.Builder
+    interface Builder {
+        fun build(): CoreComponent
     }
 }
