@@ -1,9 +1,10 @@
-package io.android.todarch.user
+package io.android.todarch.user.ui
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import io.android.todarch.core.base.BaseActivity
+import io.android.todarch.user.R
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>

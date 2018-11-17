@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/login_fragment"
-        android:name="io.android.todarch.user.LoginFragment"
+        android:name="io.android.todarch.user.ui.LoginFragment"
         tools:layout="@layout/fragment_login"/>
 
 </navigation>

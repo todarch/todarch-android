@@ -17,13 +17,13 @@ package io.android.todarch.dagger
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.android.todarch.core.dagger.TodarchViewModelFactory
-import io.android.todarch.core.dagger.ViewModelKey
-import io.android.todarch.ui.todo.TodoViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import io.android.todarch.user.UserViewModel
+import io.android.todarch.core.dagger.TodarchViewModelFactory
+import io.android.todarch.core.dagger.ViewModelKey
+import io.android.todarch.ui.todo.TodoViewModel
+import io.android.todarch.user.ui.UserViewModel
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>

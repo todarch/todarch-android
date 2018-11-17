@@ -1,4 +1,4 @@
-package io.android.todarch.user
+package io.android.todarch.user.ui
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

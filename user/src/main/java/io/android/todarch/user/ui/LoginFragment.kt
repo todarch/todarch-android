@@ -1,4 +1,4 @@
-package io.android.todarch.user
+package io.android.todarch.user.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import io.android.todarch.core.base.BaseFragment
 import io.android.todarch.core.util.isValidEmail
+import io.android.todarch.user.R
 import io.android.todarch.user.databinding.FragmentLoginBinding
 import javax.inject.Inject
 
