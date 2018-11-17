@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/register_fragment"
-        android:name="io.android.todarch.user.RegisterFragment"
+        android:name="io.android.todarch.user.ui.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register"/>
 

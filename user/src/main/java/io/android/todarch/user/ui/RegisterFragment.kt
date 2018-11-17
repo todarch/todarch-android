@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.user
+package io.android.todarch.user.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import io.android.todarch.core.base.BaseFragment
 import io.android.todarch.core.util.isValidEmail
 import io.android.todarch.core.util.strings
+import io.android.todarch.user.R
 import io.android.todarch.user.databinding.FragmentRegisterBinding
 
 /**
