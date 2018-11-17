@@ -6,4 +6,6 @@
     <dimen name="min_size">8dp</dimen>
     <dimen name="x_min_size">4dp</dimen>
     <dimen name="xx_min_size">2dp</dimen>
+
+    <dimen name="text_size_16">16sp</dimen>
 </resources>

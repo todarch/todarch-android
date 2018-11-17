@@ -16,9 +16,10 @@
 package io.android.todarch.core.base
 
 import dagger.android.support.DaggerFragment
+import io.android.todarch.core.util.ContextAware
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 15.10.2018.
  */
-open class BaseFragment : DaggerFragment()
+open class BaseFragment : DaggerFragment(), ContextAware

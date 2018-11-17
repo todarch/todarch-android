@@ -19,50 +19,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import io.android.todarch.core.base.BaseFragment
 import io.android.todarch.core.util.isValidEmail
 import io.android.todarch.core.util.strings
 import io.android.todarch.user.R
-import io.android.todarch.user.databinding.FragmentLoginBinding
-import javax.inject.Inject
+import io.android.todarch.user.databinding.FragmentRegisterBinding
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 3.11.2018.
+ * @since 10.11.2018.
  */
-class LoginFragment : BaseFragment(), View.OnClickListener {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var binding: FragmentLoginBinding
-    private lateinit var userViewModel: UserViewModel
+class RegisterFragment : BaseFragment(), View.OnClickListener {
+    private lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userViewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(UserViewModel::class.java)
 
-        binding.login.setOnClickListener(this)
         binding.register.setOnClickListener(this)
+        binding.toolbar.back.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
+        val navController = this@RegisterFragment.findNavController()
         when (v?.id) {
-            R.id.login -> {
+            R.id.register -> {
                 val email = binding.email.editText?.text?.trim()?.toString()
                 val password = binding.password.editText?.text?.toString()
                 if (validateInputs(email, password)) {
-                    userViewModel.login(email!!, password!!)
+                    // TODO register user
+                    navController.navigateUp()
                 }
             }
-            R.id.register -> {
-                this@LoginFragment.findNavController().navigate(R.id.action_login_fragment_to_registerFragment)
+            R.id.back -> {
+                navController.navigateUp()
             }
         }
     }

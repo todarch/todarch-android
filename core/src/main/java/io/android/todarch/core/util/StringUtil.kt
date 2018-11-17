@@ -13,30 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.user.ui
+package io.android.todarch.core.util
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import io.android.todarch.core.base.BaseActivity
-import io.android.todarch.user.R
+import androidx.annotation.AnyRes
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 2.11.2018.
+ * @since 10.11.2018.
+ * @see <a href="https://gist.github.com/pablisco/da25563d57559dd1d18f165272269b57">Extending Resources</a>
  */
-class UserManagementActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_management)
+val Context.strings
+    get() = ResourceMapper { getString(it) }
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+val ContextAware.strings
+    get() = getContext()?.strings
 
-    companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, UserManagementActivity::class.java)
-        }
-    }
+class ResourceMapper<out T>(private val mapRes: (resId: Int) -> T) {
+    operator fun get(@AnyRes resId: Int) = mapRes(resId)
+}
+
+interface ContextAware {
+    fun getContext(): Context?
 }
