@@ -22,7 +22,6 @@ import dagger.Component
  * @since 21.10.2018.
  */
 @Component
-// TODO: add common modules: e.g. SharedPrefModules
 interface CoreComponent {
 
     @Component.Builder

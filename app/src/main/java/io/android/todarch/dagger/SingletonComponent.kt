@@ -20,6 +20,7 @@ import io.android.todarch.core.dagger.CoreComponent
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
+import io.android.todarch.core.data.api.ApiModule
 import javax.inject.Singleton
 
 /**
@@ -31,6 +32,7 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         SingletonModule::class,
+        ApiModule::class,
         ActivityBuilder::class
     ],
     dependencies = [CoreComponent::class]
