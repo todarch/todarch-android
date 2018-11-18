@@ -19,6 +19,8 @@ android {
         targetSdkVersion versions.targetSdk
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        buildConfigField("String", "BASE_URL", '"https://api.todarch.com/"')
     }
 
     buildTypes {
@@ -52,6 +54,7 @@ dependencies {
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${versions.retrofitCoroutines}"
 
     // Navigation
     api "android.arch.navigation:navigation-fragment-ktx:${versions.navigation}"
