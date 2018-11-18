@@ -24,6 +24,7 @@ import io.android.todarch.core.dagger.TodarchViewModelFactory
 import io.android.todarch.core.dagger.ViewModelKey
 import io.android.todarch.ui.todo.TodoViewModel
 import io.android.todarch.user.ui.LoginViewModel
+import io.android.todarch.user.ui.RegisterViewModel
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
@@ -40,6 +41,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     internal abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterViewModel::class)
+    internal abstract fun bindRegisterViewModel(registerViewModel: RegisterViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(viewModelFactory: TodarchViewModelFactory): ViewModelProvider.Factory
