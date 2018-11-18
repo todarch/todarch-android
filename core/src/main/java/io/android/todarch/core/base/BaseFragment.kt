@@ -15,6 +15,9 @@
  */
 package io.android.todarch.core.base
 
+import androidx.annotation.CallSuper
+import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Lifecycle
 import dagger.android.support.DaggerFragment
 import io.android.todarch.core.util.ContextAware
 
@@ -22,4 +25,40 @@ import io.android.todarch.core.util.ContextAware
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 15.10.2018.
  */
-open class BaseFragment : DaggerFragment(), ContextAware
+abstract class BaseFragment : DaggerFragment(), ContextAware {
+    private var dialogFragment: DialogFragment? = null
+    private var dialogTag: String? = null
+    private var checkOpenDialog: Boolean = false
+
+    @CallSuper
+    override fun onStart() {
+        super.onStart()
+        if (checkOpenDialog) {
+            openDialog()
+        }
+    }
+
+    protected fun showFragmentDialog(dialogFragment: DialogFragment, tag: String) {
+        this.dialogFragment = dialogFragment
+        this.dialogTag = tag
+        if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            openDialog()
+        } else {
+            checkOpenDialog = true
+        }
+    }
+
+    private fun openDialog() {
+        val activity = activity ?: return
+        checkOpenDialog = false
+        activity.supportFragmentManager.apply {
+            val fragmentTransaction = beginTransaction()
+            val fragment = findFragmentByTag(dialogTag)
+            if (fragment != null) {
+                fragmentTransaction.remove(fragment)
+            }
+            fragmentTransaction.addToBackStack(null)
+            dialogFragment?.show(fragmentTransaction, dialogTag)
+        }
+    }
+}

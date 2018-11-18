@@ -20,8 +20,8 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import dagger.android.support.DaggerAppCompatActivity
 import io.android.todarch.R
+import io.android.todarch.core.base.BaseActivity
 import io.android.todarch.databinding.ActivityTodoBinding
 import io.android.todarch.user.ui.UserManagementActivity
 
@@ -29,7 +29,7 @@ import io.android.todarch.user.ui.UserManagementActivity
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 13.10.2018.
  */
-class TodoActivity : DaggerAppCompatActivity() {
+class TodoActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
