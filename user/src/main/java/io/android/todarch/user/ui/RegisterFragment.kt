@@ -42,7 +42,7 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.register.setOnClickListener(this)
-        binding.toolbar.back.setOnClickListener(this)
+        binding.toolbar.toolbarBack.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -56,7 +56,7 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
                     navController.navigateUp()
                 }
             }
-            R.id.back -> {
+            R.id.toolbar_back -> {
                 navController.navigateUp()
             }
         }
