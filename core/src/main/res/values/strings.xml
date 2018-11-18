@@ -11,4 +11,10 @@
     <string name="register">Register</string>
     <string name="error_invalid_email">Please enter a valid e-mail.</string>
     <string name="error_invalid_password">Please enter a valid password.</string>
+    <string name="error_login">Login failed</string>
+    <string name="success_login">Successfully logined!</string>
+
+    <!-- REGISTER -->
+    <string name="error_register">Register failed</string>
+    <string name="success_register">Successfully registered!</string>
 </resources>

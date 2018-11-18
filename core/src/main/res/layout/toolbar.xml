@@ -24,13 +24,13 @@
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/back"
+                android:id="@+id/toolbar_back"
                 style="@style/Toolbar.Action"
                 android:contentDescription="@null"
                 app:srcCompat="@drawable/ic_back_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/title"
+                android:id="@+id/toolbar_title"
                 style="@style/Toolbar.Title"
                 android:paddingStart="@dimen/min_size"
                 android:paddingLeft="@dimen/min_size"
