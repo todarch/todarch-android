@@ -9,7 +9,7 @@
     <string name="login">Login</string>
     <string name="or">OR</string>
     <string name="register">Register</string>
-    <string name="error_invalid_email">PUlease enter a valid e-mail.</string>
+    <string name="error_invalid_email">Please enter a valid e-mail.</string>
     <string name="error_invalid_password">Please enter a valid password.</string>
     <string name="error_login">Login failed</string>
     <string name="success_login">Successfully logined!</string>
