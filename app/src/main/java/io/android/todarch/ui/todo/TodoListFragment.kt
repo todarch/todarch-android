@@ -34,6 +34,7 @@ class TodoListFragment : BaseFragment(), View.OnClickListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var binding: FragmentTodoListBinding
+    private lateinit var bottomSheetFragmentBottomSheet: AddTodoFragmentBottomSheet
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTodoListBinding.inflate(inflater, container, false)
@@ -44,13 +45,21 @@ class TodoListFragment : BaseFragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         val todoViewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(TodoViewModel::class.java)
 
+        bottomSheetFragmentBottomSheet = AddTodoFragmentBottomSheet.newInstance()
         binding.addTodo.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.add_todo -> {
-                // TODO add a todo
+                if (bottomSheetFragmentBottomSheet.showsDialog) {
+                    showFragmentDialog(
+                        bottomSheetFragmentBottomSheet,
+                        AddTodoFragmentBottomSheet.TAG
+                    )
+                } else {
+                    bottomSheetFragmentBottomSheet.dismiss()
+                }
             }
         }
     }

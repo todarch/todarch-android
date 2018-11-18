@@ -8,4 +8,6 @@
     <dimen name="xx_min_size">2dp</dimen>
 
     <dimen name="text_size_16">16sp</dimen>
+
+    <dimen name="radius_16">16dp</dimen>
 </resources>

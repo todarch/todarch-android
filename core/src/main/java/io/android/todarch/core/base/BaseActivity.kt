@@ -23,4 +23,4 @@ import dagger.android.support.DaggerAppCompatActivity
  * @since 21.10.2018.
  */
 @SuppressLint("Registered")
-open class BaseActivity : DaggerAppCompatActivity()
+abstract class BaseActivity : DaggerAppCompatActivity()
