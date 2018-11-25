@@ -28,7 +28,7 @@ import io.android.todarch.user.dagger.UserManagementActivityFragmentBuildersModu
  * @since 21.10.2018.
  */
 @Module
-abstract class ActivityBuilder {
+abstract class ActivityBuilderModule {
 
     @ScopeActivity
     @ContributesAndroidInjector(modules = [TodoActivityFragmentBuildersModule::class])

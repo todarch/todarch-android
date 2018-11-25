@@ -16,11 +16,12 @@
 package io.android.todarch
 
 import android.os.StrictMode
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
+import io.android.todarch.core.BuildConfig
 import io.android.todarch.core.dagger.CoreComponent
 import io.android.todarch.core.dagger.DaggerCoreComponent
 import io.android.todarch.dagger.DaggerSingletonComponent
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
@@ -58,6 +59,7 @@ class TodarchApplication : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out TodarchApplication> {
         return DaggerSingletonComponent.builder()
             .coreComponent(coreComponent)
+            .application(this)
             .create(this)
     }
 }

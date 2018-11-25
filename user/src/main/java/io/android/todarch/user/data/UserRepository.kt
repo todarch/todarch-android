@@ -15,13 +15,14 @@
  */
 package io.android.todarch.user.data
 
+import io.android.todarch.core.data.CoroutinesContextProvider
 import io.android.todarch.core.data.api.Result
-import io.android.todarch.core.data.api.TodarchService
 import io.android.todarch.core.data.model.User
 import io.android.todarch.core.data.model.response.ResponseLogin
 import io.android.todarch.core.data.model.response.ResponseRegister
-import io.android.todarch.core.util.safeApiCall
-import java.io.IOException
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,47 +31,46 @@ import javax.inject.Singleton
  * @since 10.11.2018.
  */
 @Singleton
-class UserRepository @Inject constructor(private val service: TodarchService) {
-    /**
-     * registers new [User]
-     */
-    suspend fun register(email: String, password: String) = safeApiCall(
-        call = { requestRegister(email, password) },
-        errorMessage = "Register Failed"
-    )
+class UserRepository @Inject constructor(
+    private val localDataSource: UserLocalDataSource,
+    private val remoteDataSource: UserRemoteDataSource,
+    contextProvider: CoroutinesContextProvider
+) {
+    var user: User? = null
+        private set
 
-    private suspend fun requestRegister(
-        email: String,
-        password: String
-    ): Result<ResponseRegister> {
-        val response = service.register(User(email, password)).await()
-        if (response.errorCode.isNullOrEmpty()) {
-            return Result.Success(response)
-        }
-        return Result.Error(
-            IOException("Error getting comments ${response.errorCode} ${response.errorMessage}")
-        )
+    val isLoggedIn: Boolean
+        get() = userId != null
+
+    private var userId: String? = null
+
+    init {
+        userId = localDataSource.userId
+        GlobalScope.launch(contextProvider.io, CoroutineStart.DEFAULT, null, {
+            user = localDataSource.getUser()
+        })
     }
 
-    /**
-     * logs the [User] in
-     */
-    suspend fun login(email: String, password: String) = safeApiCall(
-        call = { requestLogin(email, password) },
-        errorMessage = "Register Failed"
-    )
+    suspend fun login(username: String, password: String): Result<ResponseLogin> {
+        val result = remoteDataSource.login(username, password)
 
-    private suspend fun requestLogin(
-        email: String,
-        password: String
-    ): Result<ResponseLogin> {
-        val response = service.login(User(email, password)).await()
-        if (response.errorCode.isNullOrEmpty()) {
-            // TODO save user to local
-            return Result.Success(response)
+        if (result is Result.Success) {
+            setLoggedInUser(User(username, password))
         }
-        return Result.Error(
-            IOException("Error getting comments ${response.errorCode} ${response.errorMessage}")
-        )
+        return result
+    }
+
+    suspend fun register(username: String, password: String): Result<ResponseRegister> {
+        return remoteDataSource.register(username, password)
+    }
+
+    suspend fun logout() {
+        userId = null
+        localDataSource.logout()
+    }
+
+    private suspend fun setLoggedInUser(loggedInUser: User) {
+        userId = loggedInUser.email
+        localDataSource.setUser(loggedInUser)
     }
 }
