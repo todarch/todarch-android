@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.user.dagger
+package io.android.todarch.core.dagger
 
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
-import io.android.todarch.core.dagger.ScopeFragment
-import io.android.todarch.user.ui.LoginFragment
-import io.android.todarch.user.ui.RegisterFragment
+import dagger.Provides
+import io.android.todarch.core.data.CoroutinesContextProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.android.Main
+import javax.inject.Singleton
 
 /**
+ * Provide [CoroutinesContextProvider] to this app's components.
+ *
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 3.11.2018.
+ * @since 18.11.2018.
  */
 @Module
-abstract class UserManagementActivityFragmentBuildersModule {
-    @ScopeFragment
-    @ContributesAndroidInjector
-    internal abstract fun bindLoginFragment(): LoginFragment
+class CoroutinesContextProviderModule {
 
-    @ScopeFragment
-    @ContributesAndroidInjector
-    internal abstract fun bindRegisterFragment(): RegisterFragment
+    @Singleton
+    @Provides
+    fun provideCoroutinesContextProvider(): CoroutinesContextProvider {
+        return CoroutinesContextProvider(Dispatchers.Main, Dispatchers.Default)
+    }
 }
