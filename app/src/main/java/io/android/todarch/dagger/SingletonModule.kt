@@ -16,9 +16,9 @@
 package io.android.todarch.dagger
 
 import android.content.Context
-import io.android.todarch.TodarchApplication
 import dagger.Module
 import dagger.Provides
+import io.android.todarch.TodarchApplication
 import javax.inject.Singleton
 
 /**
@@ -28,8 +28,8 @@ import javax.inject.Singleton
 @Module(includes = [ViewModelModule::class])
 class SingletonModule {
 
-    @Provides
     @Singleton
+    @Provides
     internal fun provideContext(application: TodarchApplication): Context {
         return application
     }

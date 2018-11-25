@@ -18,30 +18,36 @@ package io.android.todarch.ui.todo
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import io.android.todarch.R
 import io.android.todarch.core.base.BaseActivity
 import io.android.todarch.databinding.ActivityTodoBinding
 import io.android.todarch.user.ui.UserManagementActivity
+import javax.inject.Inject
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 13.10.2018.
  */
 class TodoActivity : BaseActivity() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var todoViewModel: TodoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityTodoBinding = DataBindingUtil.setContentView(this, R.layout.activity_todo)
         val navController = Navigation.findNavController(this, R.id.todo_nav_fragment)
+        todoViewModel = ViewModelProviders.of(this, viewModelFactory).get(TodoViewModel::class.java)
 
         // Set up ActionBar
         setSupportActionBar(binding.toolbar)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        if (savedInstanceState == null) {
-            // TODO savedInstanceState check is for testing purpose, remove it and add user logged in check
+        if (todoViewModel.isNotLoggedIn()) {
             startActivityForResult(UserManagementActivity.newIntent(this), REQUEST_CODE_LOGIN)
             overridePendingTransition(0, 0) // Disable activity animation
         }
