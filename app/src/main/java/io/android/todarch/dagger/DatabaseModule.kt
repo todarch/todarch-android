@@ -16,21 +16,33 @@
 package io.android.todarch.dagger
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.annotation.NonNull
 import dagger.Module
 import dagger.Provides
-import io.android.todarch.TodarchApplication
+import io.android.todarch.data.database.AppDatabase
+import io.android.todarch.user.data.UserLocalDataSource
 import javax.inject.Singleton
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 21.10.2018.
+ * @since 23.11.2018.
  */
-@Module(includes = [ViewModelModule::class])
-class SingletonModule {
+@Module
+class DatabaseModule {
 
     @Singleton
     @Provides
-    internal fun provideContext(application: TodarchApplication): Context {
-        return application
+    internal fun provideUserLocalDataSource(
+        @NonNull prefs: SharedPreferences,
+        @NonNull database: AppDatabase
+    ): UserLocalDataSource {
+        return UserLocalDataSource(prefs, database.userDao())
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideDatabase(@NonNull context: Context): AppDatabase {
+        return AppDatabase.getInstance(context)
     }
 }

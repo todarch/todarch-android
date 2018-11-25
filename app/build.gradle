@@ -67,4 +67,7 @@ dependencies {
 
     // Dagger.Android
     kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+
+    // Room
+    kapt "androidx.room:room-compiler:${versions.room}"
 }

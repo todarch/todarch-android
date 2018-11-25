@@ -15,12 +15,19 @@
  */
 package io.android.todarch.ui.todo
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
+import io.android.todarch.user.data.UserRepository
 import javax.inject.Inject
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 21.10.2018.
  */
-class TodoViewModel @Inject constructor(val context: Context) : ViewModel()
+class TodoViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
+
+    fun isNotLoggedIn(): Boolean {
+        return !userRepository.isLoggedIn
+    }
+}

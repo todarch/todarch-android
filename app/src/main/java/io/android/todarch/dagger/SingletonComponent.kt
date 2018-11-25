@@ -15,12 +15,16 @@
  */
 package io.android.todarch.dagger
 
-import io.android.todarch.TodarchApplication
-import io.android.todarch.core.dagger.CoreComponent
+import android.app.Application
+import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import io.android.todarch.core.data.api.ApiModule
+import io.android.todarch.TodarchApplication
+import io.android.todarch.core.dagger.ApiModule
+import io.android.todarch.core.dagger.CoreComponent
+import io.android.todarch.core.dagger.CoroutinesContextProviderModule
+import io.android.todarch.core.dagger.SharedPreferencesModule
 import javax.inject.Singleton
 
 /**
@@ -32,8 +36,11 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         SingletonModule::class,
+        CoroutinesContextProviderModule::class,
+        SharedPreferencesModule::class,
         ApiModule::class,
-        ActivityBuilder::class
+        ActivityBuilderModule::class,
+        DatabaseModule::class
     ],
     dependencies = [CoreComponent::class]
 )
@@ -41,6 +48,12 @@ abstract class SingletonComponent : AndroidInjector<TodarchApplication> {
 
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<TodarchApplication>() {
+
+        abstract override fun build(): SingletonComponent
+
         abstract fun coreComponent(module: CoreComponent): Builder
+
+        @BindsInstance
+        abstract fun application(application: Application): Builder
     }
 }

@@ -15,11 +15,16 @@
  */
 package io.android.todarch.core.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
  * @since 10.11.2018.
  */
+@Entity(tableName = "users")
 data class User(
-    val email: String,
-    val password: String
+    @PrimaryKey @ColumnInfo(name = "email") val email: String,
+    @ColumnInfo(name = "password") val password: String
 )

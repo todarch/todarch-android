@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.core.data.api
+package io.android.todarch.core.dagger
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import io.android.todarch.core.BuildConfig
-import io.android.todarch.core.data.CoroutinesContextProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.android.Main
+import io.android.todarch.core.data.api.TodarchService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -36,11 +34,6 @@ import javax.inject.Singleton
  */
 @Module
 class ApiModule {
-    @Singleton
-    @Provides
-    internal fun provideCoroutinesContextProvider(): CoroutinesContextProvider {
-        return CoroutinesContextProvider(Dispatchers.Main, Dispatchers.Default)
-    }
 
     @Singleton
     @Provides

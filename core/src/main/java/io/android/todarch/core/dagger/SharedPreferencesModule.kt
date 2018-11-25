@@ -13,25 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.user.dagger
+package io.android.todarch.core.dagger
 
+import android.content.Context
+import android.content.SharedPreferences
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
-import io.android.todarch.core.dagger.ScopeFragment
-import io.android.todarch.user.ui.LoginFragment
-import io.android.todarch.user.ui.RegisterFragment
+import dagger.Provides
+import javax.inject.Singleton
 
 /**
+ * Provide [SharedPreferences] to this app's components.
+ *
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 3.11.2018.
+ * @since 18.11.2018.
  */
 @Module
-abstract class UserManagementActivityFragmentBuildersModule {
-    @ScopeFragment
-    @ContributesAndroidInjector
-    internal abstract fun bindLoginFragment(): LoginFragment
+class SharedPreferencesModule {
 
-    @ScopeFragment
-    @ContributesAndroidInjector
-    internal abstract fun bindRegisterFragment(): RegisterFragment
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(context: Context): SharedPreferences {
+        return context.applicationContext.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+    }
 }
