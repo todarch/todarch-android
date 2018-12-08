@@ -15,6 +15,7 @@
  */
 package io.android.todarch.user.ui
 
+import androidx.annotation.UiThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,11 +24,12 @@ import io.android.todarch.core.data.api.Result
 import io.android.todarch.core.util.event.Event
 import io.android.todarch.user.R
 import io.android.todarch.user.data.UserRepository
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
@@ -36,13 +38,18 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val contextProvider: CoroutinesContextProvider,
     private val userRepository: UserRepository
-) : ViewModel() {
+) : ViewModel(), CoroutineScope {
+
     private var currentJob: Job? = null
 
     private val _uiState = MutableLiveData<LoginUIModel>()
     val uIState: LiveData<LoginUIModel>
         get() = _uiState
 
+    override val coroutineContext: CoroutineContext
+        get() = contextProvider.main
+
+    @UiThread
     fun login(email: String, password: String) {
         // only allow one login at a time
         if (currentJob?.isActive == true) {
@@ -51,27 +58,29 @@ class LoginViewModel @Inject constructor(
         currentJob = launchLogin(email, password)
     }
 
-    private fun launchLogin(email: String, password: String) =
-        GlobalScope.launch(contextProvider.io, CoroutineStart.DEFAULT, null, {
-            emitUiState(showProgress = true)
+    private fun launchLogin(email: String, password: String) = launch {
+        emitUiState(showProgress = true)
 
-            val result = userRepository.login(email, password)
+        val result = withContext(contextProvider.io) {
+            userRepository.login(email, password)
+        }
 
-            if (result is Result.Success) {
-                emitUiState(showSuccess = Event(R.string.success_register))
-            } else {
-                emitUiState(showError = Event(R.string.error_login))
-            }
-        })
+        if (result is Result.Success) {
+            emitUiState(showSuccess = Event(R.string.success_register))
+        } else {
+            emitUiState(showError = Event(R.string.error_login))
+        }
+    }
 
+    @UiThread
     private fun emitUiState(
         showProgress: Boolean = false,
         showError: Event<Int>? = null,
         showSuccess: Event<Int>? = null
-    ) = GlobalScope.launch(contextProvider.main, CoroutineStart.DEFAULT, null, {
+    ) {
         val uiModel = LoginUIModel(showProgress, showError, showSuccess)
         _uiState.value = uiModel
-    })
+    }
 
     override fun onCleared() {
         super.onCleared()

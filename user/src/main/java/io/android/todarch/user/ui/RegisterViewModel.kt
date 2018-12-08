@@ -15,6 +15,7 @@
  */
 package io.android.todarch.user.ui
 
+import androidx.annotation.UiThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,11 +24,12 @@ import io.android.todarch.core.data.api.Result
 import io.android.todarch.core.util.event.Event
 import io.android.todarch.user.R
 import io.android.todarch.user.data.UserRepository
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
@@ -36,42 +38,49 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val contextProvider: CoroutinesContextProvider,
     private val userRepository: UserRepository
-) : ViewModel() {
+) : ViewModel(), CoroutineScope {
+
     private var currentJob: Job? = null
 
     private val _uiState = MutableLiveData<RegisterUIModel>()
     val uIState: LiveData<RegisterUIModel>
         get() = _uiState
 
+    override val coroutineContext: CoroutineContext
+        get() = contextProvider.main
+
+    @UiThread
     fun register(email: String, password: String) {
-        // only allow one login at a time
+        // only allow one register at a time
         if (currentJob?.isActive == true) {
             return
         }
         currentJob = launchRegister(email, password)
     }
 
-    private fun launchRegister(email: String, password: String) =
-        GlobalScope.launch(contextProvider.io, CoroutineStart.DEFAULT, null, {
-            emitUiState(showProgress = true)
+    private fun launchRegister(email: String, password: String) = launch {
+        emitUiState(showProgress = true)
 
-            val result = userRepository.register(email, password)
+        val result = withContext(contextProvider.io) {
+            userRepository.register(email, password)
+        }
 
-            if (result is Result.Success) {
-                emitUiState(showSuccess = Event(R.string.success_register))
-            } else {
-                emitUiState(showError = Event(R.string.error_register))
-            }
-        })
+        if (result is Result.Success) {
+            emitUiState(showSuccess = Event(R.string.success_register))
+        } else {
+            emitUiState(showError = Event(R.string.error_register))
+        }
+    }
 
+    @UiThread
     private fun emitUiState(
         showProgress: Boolean = false,
         showError: Event<Int>? = null,
         showSuccess: Event<Int>? = null
-    ) = GlobalScope.launch(contextProvider.main, CoroutineStart.DEFAULT, null, {
+    ) {
         val uiModel = RegisterUIModel(showProgress, showError, showSuccess)
         _uiState.value = uiModel
-    })
+    }
 
     override fun onCleared() {
         super.onCleared()
