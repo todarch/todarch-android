@@ -25,7 +25,7 @@ class UserRemoteDataSource @Inject constructor(private val service: TodarchServi
     )
 
     private suspend fun requestLogin(email: String, password: String): Result<ResponseLogin> {
-        val response = service.login(User(email, password)).await()
+        val response = service.login(User(email, null, password)).await()
         if (response.errorCode.isNullOrEmpty()) {
             return Result.Success(response)
         }
@@ -43,7 +43,7 @@ class UserRemoteDataSource @Inject constructor(private val service: TodarchServi
     )
 
     private suspend fun requestRegister(email: String, password: String): Result<ResponseRegister> {
-        val response = service.register(User(email, password)).await()
+        val response = service.register(User(email, null, password)).await()
         if (response.errorCode.isNullOrEmpty()) {
             return Result.Success(response)
         }

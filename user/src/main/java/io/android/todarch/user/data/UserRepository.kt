@@ -20,7 +20,6 @@ import io.android.todarch.core.data.api.Result
 import io.android.todarch.core.data.model.User
 import io.android.todarch.core.data.model.response.ResponseLogin
 import io.android.todarch.core.data.model.response.ResponseRegister
-import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,22 +39,24 @@ class UserRepository @Inject constructor(
         private set
 
     val isLoggedIn: Boolean
-        get() = userId != null
+        get() = token != null
 
-    private var userId: String? = null
+    private var token: String? = null
 
     init {
-        userId = localDataSource.userId
-        GlobalScope.launch(contextProvider.io, CoroutineStart.DEFAULT, null, {
+        token = localDataSource.token
+        GlobalScope.launch(contextProvider.io) {
             user = localDataSource.getUser()
-        })
+        }
     }
 
     suspend fun login(username: String, password: String): Result<ResponseLogin> {
         val result = remoteDataSource.login(username, password)
 
         if (result is Result.Success) {
-            setLoggedInUser(User(username, password))
+            result.data.token?.run {
+                setLoggedInUser(User(username, this, password))
+            }
         }
         return result
     }
@@ -65,12 +66,12 @@ class UserRepository @Inject constructor(
     }
 
     suspend fun logout() {
-        userId = null
+        token = null
         localDataSource.logout()
     }
 
     private suspend fun setLoggedInUser(loggedInUser: User) {
-        userId = loggedInUser.email
+        token = loggedInUser.token
         localDataSource.setUser(loggedInUser)
     }
 }
