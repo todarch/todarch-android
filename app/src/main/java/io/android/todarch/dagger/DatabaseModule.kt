@@ -20,7 +20,9 @@ import android.content.SharedPreferences
 import androidx.annotation.NonNull
 import dagger.Module
 import dagger.Provides
+import io.android.todarch.data.local.TasksLocalDataSource
 import io.android.todarch.data.database.AppDatabase
+import io.android.todarch.data.local.TasksDataSource
 import io.android.todarch.user.data.UserLocalDataSource
 import javax.inject.Singleton
 
@@ -38,6 +40,12 @@ class DatabaseModule {
         @NonNull database: AppDatabase
     ): UserLocalDataSource {
         return UserLocalDataSource(prefs, database.userDao())
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideTasksDataSource(@NonNull database: AppDatabase): TasksDataSource {
+        return TasksLocalDataSource(database.tasksDao())
     }
 
     @Singleton
