@@ -1,0 +1,42 @@
+/*
+ * Copyright 2018 Todarch
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.android.todarch.data.database
+
+import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
+/**
+ * @author Melih Gültekin <mmelihgultekin@gmail.com>
+ * @since 2.12.2018.
+ */
+class Converters {
+
+    @TypeConverter
+    fun fromStringListToString(value: String?): List<String>? {
+        if (value == null) {
+            return null
+        }
+
+        val listType = object : TypeToken<List<String>>() {}.type
+        return Gson().fromJson<List<String>>(value, listType)
+    }
+
+    @TypeConverter
+    fun fromStringListToString(list: List<String>?): String? {
+        return if (list == null) null else Gson().toJson(list)
+    }
+}
