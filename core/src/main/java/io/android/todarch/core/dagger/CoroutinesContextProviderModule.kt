@@ -19,7 +19,6 @@ import dagger.Module
 import dagger.Provides
 import io.android.todarch.core.data.CoroutinesContextProvider
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.android.Main
 import javax.inject.Singleton
 
 /**

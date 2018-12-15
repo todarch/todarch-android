@@ -1,7 +1,21 @@
+/*
+ * Copyright 2018 Todarch
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.android.todarch.user.data
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.core.content.edit
 import io.android.todarch.core.data.model.User
 import io.android.todarch.user.data.database.UserDao
@@ -18,14 +32,14 @@ class UserLocalDataSource @Inject constructor(
     private val userDao: UserDao
 ) {
 
-    private var _userId: String? = prefs.getString(KEY_USER_ID, null)
+    private var _token: String? = prefs.getString(KEY_USER_TOKEN, null)
 
     /**
-     * User Id used for "is login checks"
+     * token used for "is login checks"
      */
-    var userId: String? = _userId
+    var token: String? = _token
         set(value) {
-            prefs.edit { putString(KEY_USER_ID, value) }
+            prefs.edit { putString(KEY_USER_TOKEN, value) }
             field = value
         }
 
@@ -34,26 +48,25 @@ class UserLocalDataSource @Inject constructor(
      */
     suspend fun getUser(): User? {
         val loggedInUser = userDao.getLoggedInUser()
-        userId = loggedInUser?.email
+        token = loggedInUser?.token
         return loggedInUser
     }
 
     suspend fun setUser(user: User) {
-        prefs.edit { putString(KEY_USER_ID, user.email) }
-        val a = userDao.setLoggedInUser(user)
-        Log.d("deneme", a.toString())
+        prefs.edit { putString(KEY_USER_TOKEN, user.token) }
+        userDao.setLoggedInUser(user)
     }
 
     /**
      * Clear all data related to this user
      */
     suspend fun logout() {
-        prefs.edit { KEY_USER_ID to null }
-        userId = null
+        prefs.edit { KEY_USER_TOKEN to null }
+        token = null
         userDao.deleteLoggedInUser()
     }
 
     companion object {
-        private const val KEY_USER_ID = "KEY_USER_ID"
+        private const val KEY_USER_TOKEN = "KEY_USER_TOKEN"
     }
 }
