@@ -15,22 +15,24 @@
  */
 package io.android.todarch.core.data.api
 
-import io.android.todarch.core.data.model.Task
-import io.android.todarch.core.data.model.response.ResponseTask
+import io.android.todarch.core.data.model.User
+import io.android.todarch.core.data.model.response.ResponseLogin
+import io.android.todarch.core.data.model.response.ResponseRegister
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Body
-import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 11.11.2018.
+ * @since 5.01.2019.
  */
-interface TodarchService {
+interface UserService {
+    @POST("um/non-secured/register")
+    @Headers("No-Authentication: true")
+    fun register(@Body user: User): Deferred<ResponseRegister>
 
-    @POST("td/api/todos")
-    fun addTask(@Body task: Task): Deferred<ResponseTask>
-
-    @GET("td/api/todos")
-    fun getTasks(): Deferred<List<Task>?>
+    @POST("um/non-secured/authenticate")
+    @Headers("No-Authentication: true")
+    fun login(@Body user: User): Deferred<ResponseLogin>
 }

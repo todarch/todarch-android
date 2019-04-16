@@ -32,7 +32,6 @@ class CoroutinesContextProviderModule {
 
     @Singleton
     @Provides
-    fun provideCoroutinesContextProvider(): CoroutinesContextProvider {
-        return CoroutinesContextProvider(Dispatchers.Main, Dispatchers.Default)
-    }
+    fun provideCoroutinesContextProvider(): CoroutinesContextProvider =
+        CoroutinesContextProvider(Dispatchers.Main, Dispatchers.Default)
 }

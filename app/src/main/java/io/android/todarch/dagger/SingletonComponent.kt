@@ -21,10 +21,11 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import io.android.todarch.TodarchApplication
-import io.android.todarch.core.dagger.ApiModule
+import io.android.todarch.core.dagger.TodoApiModule
 import io.android.todarch.core.dagger.CoreComponent
 import io.android.todarch.core.dagger.CoroutinesContextProviderModule
 import io.android.todarch.core.dagger.SharedPreferencesModule
+import io.android.todarch.core.dagger.UserApiModule
 import javax.inject.Singleton
 
 /**
@@ -38,7 +39,8 @@ import javax.inject.Singleton
         SingletonModule::class,
         CoroutinesContextProviderModule::class,
         SharedPreferencesModule::class,
-        ApiModule::class,
+        UserApiModule::class,
+        TodoApiModule::class,
         ActivityBuilderModule::class,
         DatabaseModule::class
     ],
