@@ -20,30 +20,32 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import dagger.Module
 import dagger.Provides
 import io.android.todarch.core.BuildConfig
-import io.android.todarch.core.data.api.TodarchService
+import io.android.todarch.core.data.api.UserService
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 10.11.2018.
+ * @since 5.01.2019.
  */
 @Module
-class ApiModule {
+class UserApiModule {
 
     @Singleton
     @Provides
-    internal fun provideServices(retrofit: Retrofit): TodarchService {
-        return retrofit.create(TodarchService::class.java)
-    }
+    internal fun provideServices(@Named(NAMED_USER) retrofit: Retrofit): UserService =
+        retrofit.create(UserService::class.java)
 
     @Singleton
     @Provides
-    internal fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    @Named(NAMED_USER)
+    internal fun provideRetrofit(@Named(NAMED_USER) okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -54,8 +56,10 @@ class ApiModule {
 
     @Singleton
     @Provides
+    @Named(NAMED_USER)
     internal fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
+        @Named(NAMED_USER) interceptors: Array<Interceptor>?,
         stethoInterceptor: StethoInterceptor?
     ): OkHttpClient {
         val httpClientBuilder = OkHttpClient.Builder()
@@ -67,6 +71,10 @@ class ApiModule {
             httpClientBuilder.addNetworkInterceptor(stethoInterceptor)
         }
 
+        for (interceptor in interceptors.orEmpty()) {
+            httpClientBuilder.addInterceptor(interceptor)
+        }
+
         httpLoggingInterceptor.level =
                 if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         httpClientBuilder.addInterceptor(httpLoggingInterceptor)
@@ -76,19 +84,11 @@ class ApiModule {
 
     @Singleton
     @Provides
-    internal fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor()
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideStethoInterceptor(): StethoInterceptor? {
-        return if (BuildConfig.DEBUG) {
-            StethoInterceptor()
-        } else null
-    }
+    @Named(NAMED_USER)
+    internal fun provideHttpInterceptors(): Array<Interceptor>? = null
 
     companion object {
-        private const val TIMEOUT_SECOND: Long = 60
+        const val TIMEOUT_SECOND: Long = 30
+        const val NAMED_USER: String = "user"
     }
 }

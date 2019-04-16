@@ -58,8 +58,11 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-    api project(':core')
     implementation project(':user')
 
     // Dagger
@@ -70,4 +73,5 @@ dependencies {
 
     // Room
     kapt "androidx.room:room-compiler:${versions.room}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
 }

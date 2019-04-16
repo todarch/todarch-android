@@ -15,8 +15,7 @@
  */
 package io.android.todarch.user.data
 
-import android.content.SharedPreferences
-import androidx.core.content.edit
+import io.android.todarch.core.data.Session
 import io.android.todarch.core.data.model.User
 import io.android.todarch.user.data.database.UserDao
 import javax.inject.Inject
@@ -28,45 +27,29 @@ import javax.inject.Singleton
  */
 @Singleton
 class UserLocalDataSource @Inject constructor(
-    private val prefs: SharedPreferences,
+    private val session: Session,
     private val userDao: UserDao
 ) {
-
-    private var _token: String? = prefs.getString(KEY_USER_TOKEN, null)
-
-    /**
-     * token used for "is login checks"
-     */
-    var token: String? = _token
-        set(value) {
-            prefs.edit { putString(KEY_USER_TOKEN, value) }
-            field = value
-        }
-
     /**
      * Get the logged in user. If missing, null is returned
      */
-    suspend fun getUser(): User? {
-        val loggedInUser = userDao.getLoggedInUser()
-        token = loggedInUser?.token
-        return loggedInUser
-    }
+    suspend fun getUser(): User? = userDao.getLoggedInUser()
 
     suspend fun setUser(user: User) {
-        prefs.edit { putString(KEY_USER_TOKEN, user.token) }
-        userDao.setLoggedInUser(user)
+        user.apply {
+            session.token = token
+            session.email = email
+            session.password = password
+
+            userDao.setLoggedInUser(this)
+        }
     }
 
     /**
      * Clear all data related to this user
      */
     suspend fun logout() {
-        prefs.edit { KEY_USER_TOKEN to null }
-        token = null
+        session.clear()
         userDao.deleteLoggedInUser()
-    }
-
-    companion object {
-        private const val KEY_USER_TOKEN = "KEY_USER_TOKEN"
     }
 }

@@ -13,25 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.core.dagger
+package io.android.todarch.data.remote
 
-import dagger.Module
-import dagger.Provides
-import io.android.todarch.core.data.CoroutinesContextProvider
-import kotlinx.coroutines.Dispatchers
+import io.android.todarch.core.data.api.TodarchService
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Provide [CoroutinesContextProvider] to this app's components.
- *
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 18.11.2018.
+ * @since 19.11.2018.
  */
-@Module
-class CoroutinesContextProviderModule {
-
-    @Singleton
-    @Provides
-    fun provideCoroutinesContextProvider(): CoroutinesContextProvider =
-        CoroutinesContextProvider(Dispatchers.Main, Dispatchers.Default)
-}
+@Singleton
+class TasksRemoteDataSource @Inject constructor(private val service: TodarchService)

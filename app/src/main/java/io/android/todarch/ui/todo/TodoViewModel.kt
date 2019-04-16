@@ -16,7 +16,8 @@
 package io.android.todarch.ui.todo
 
 import androidx.lifecycle.ViewModel
-import io.android.todarch.user.data.UserRepository
+import io.android.todarch.core.data.Session
+import io.android.todarch.data.TasksRepository
 import javax.inject.Inject
 
 /**
@@ -24,10 +25,9 @@ import javax.inject.Inject
  * @since 21.10.2018.
  */
 class TodoViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val session: Session,
+    private val tasksRepository: TasksRepository
 ) : ViewModel() {
 
-    fun isNotLoggedIn(): Boolean {
-        return !userRepository.isLoggedIn
-    }
+    fun isNotLoggedIn() = !session.isLoggedIn
 }

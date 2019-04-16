@@ -13,25 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.core.dagger
+package io.android.todarch.core.data.model.response
 
-import dagger.Module
-import dagger.Provides
-import io.android.todarch.core.data.CoroutinesContextProvider
-import kotlinx.coroutines.Dispatchers
-import javax.inject.Singleton
+import com.google.gson.annotations.SerializedName
 
 /**
- * Provide [CoroutinesContextProvider] to this app's components.
- *
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 18.11.2018.
+ * @since 15.12.2018.
  */
-@Module
-class CoroutinesContextProviderModule {
-
-    @Singleton
-    @Provides
-    fun provideCoroutinesContextProvider(): CoroutinesContextProvider =
-        CoroutinesContextProvider(Dispatchers.Main, Dispatchers.Default)
-}
+data class ResponseTask(
+    @SerializedName("id") val id: String?,
+    @SerializedName("errorCode") override val errorCode: String?,
+    @SerializedName("errorMessage") override val errorMessage: String?
+) : BaseResponse
