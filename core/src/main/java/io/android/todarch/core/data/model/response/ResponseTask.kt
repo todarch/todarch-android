@@ -13,21 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.ui.todo
+package io.android.todarch.core.data.model.response
 
-import androidx.lifecycle.ViewModel
-import io.android.todarch.core.data.Session
-import io.android.todarch.data.TasksRepository
-import javax.inject.Inject
+import com.google.gson.annotations.SerializedName
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 21.10.2018.
+ * @since 15.12.2018.
  */
-class TodoViewModel @Inject constructor(
-    private val session: Session,
-    private val tasksRepository: TasksRepository
-) : ViewModel() {
-
-    fun isNotLoggedIn() = !session.isLoggedIn
-}
+data class ResponseTask(
+    @SerializedName("id") val id: String?,
+    @SerializedName("errorCode") override val errorCode: String?,
+    @SerializedName("errorMessage") override val errorMessage: String?
+) : BaseResponse

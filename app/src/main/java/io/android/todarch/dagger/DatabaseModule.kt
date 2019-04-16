@@ -16,13 +16,13 @@
 package io.android.todarch.dagger
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.annotation.NonNull
 import dagger.Module
 import dagger.Provides
-import io.android.todarch.data.local.TasksLocalDataSource
+import io.android.todarch.core.data.Session
 import io.android.todarch.data.database.AppDatabase
 import io.android.todarch.data.local.TasksDataSource
+import io.android.todarch.data.local.TasksLocalDataSource
 import io.android.todarch.user.data.UserLocalDataSource
 import javax.inject.Singleton
 
@@ -36,21 +36,16 @@ class DatabaseModule {
     @Singleton
     @Provides
     internal fun provideUserLocalDataSource(
-        @NonNull prefs: SharedPreferences,
+        @NonNull session: Session,
         @NonNull database: AppDatabase
-    ): UserLocalDataSource {
-        return UserLocalDataSource(prefs, database.userDao())
-    }
+    ): UserLocalDataSource = UserLocalDataSource(session, database.userDao())
 
     @Singleton
     @Provides
-    internal fun provideTasksDataSource(@NonNull database: AppDatabase): TasksDataSource {
-        return TasksLocalDataSource(database.tasksDao())
-    }
+    internal fun provideTasksDataSource(@NonNull database: AppDatabase): TasksDataSource =
+        TasksLocalDataSource(database.tasksDao())
 
     @Singleton
     @Provides
-    internal fun provideDatabase(@NonNull context: Context): AppDatabase {
-        return AppDatabase.getInstance(context)
-    }
+    internal fun provideDatabase(@NonNull context: Context): AppDatabase = AppDatabase.getInstance(context)
 }

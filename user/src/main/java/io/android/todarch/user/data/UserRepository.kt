@@ -38,13 +38,7 @@ class UserRepository @Inject constructor(
     var user: User? = null
         private set
 
-    val isLoggedIn: Boolean
-        get() = token != null
-
-    private var token: String? = null
-
     init {
-        token = localDataSource.token
         GlobalScope.launch(contextProvider.io) {
             user = localDataSource.getUser()
         }
@@ -61,17 +55,14 @@ class UserRepository @Inject constructor(
         return result
     }
 
-    suspend fun register(username: String, password: String): Result<ResponseRegister> {
-        return remoteDataSource.register(username, password)
-    }
+    suspend fun register(username: String, password: String): Result<ResponseRegister> =
+        remoteDataSource.register(username, password)
 
     suspend fun logout() {
-        token = null
         localDataSource.logout()
     }
 
     private suspend fun setLoggedInUser(loggedInUser: User) {
-        token = loggedInUser.token
         localDataSource.setUser(loggedInUser)
     }
 }

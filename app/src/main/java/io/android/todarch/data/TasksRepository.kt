@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.ui.todo
+package io.android.todarch.data
 
-import androidx.lifecycle.ViewModel
-import io.android.todarch.core.data.Session
-import io.android.todarch.data.TasksRepository
+import io.android.todarch.data.local.TasksDataSource
+import io.android.todarch.data.remote.TasksRemoteDataSource
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 21.10.2018.
+ * @since 1.12.2018.
  */
-class TodoViewModel @Inject constructor(
-    private val session: Session,
-    private val tasksRepository: TasksRepository
-) : ViewModel() {
-
-    fun isNotLoggedIn() = !session.isLoggedIn
-}
+@Singleton
+class TasksRepository @Inject constructor(
+    private val localDataSource: TasksDataSource,
+    private val remoteDataSource: TasksRemoteDataSource
+)
