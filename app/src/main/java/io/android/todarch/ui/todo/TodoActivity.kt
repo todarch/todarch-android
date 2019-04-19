@@ -17,6 +17,7 @@ package io.android.todarch.ui.todo
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -55,10 +56,11 @@ class TodoActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_LOGIN) {
-            if (resultCode == RESULT_OK) {
-                // TODO trigger user related ui info update
-            }
+        if (requestCode == REQUEST_CODE_LOGIN && resultCode == RESULT_OK) {
+            // TODO trigger user related ui info update
+        } else {
+            overridePendingTransition(0, 0) // Disable activity animation
+            ActivityCompat.finishAffinity(this@TodoActivity)
         }
     }
 

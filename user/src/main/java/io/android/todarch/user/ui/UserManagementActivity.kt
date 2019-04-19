@@ -35,8 +35,7 @@ class UserManagementActivity : BaseActivity() {
     }
 
     companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, UserManagementActivity::class.java)
-        }
+        fun newIntent(context: Context): Intent =
+            Intent(context, UserManagementActivity::class.java)
     }
 }
