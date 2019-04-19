@@ -28,4 +28,8 @@ abstract class TodoActivityFragmentBuildersModule {
     @ScopeFragment
     @ContributesAndroidInjector
     internal abstract fun bindTodoListFragment(): TodoListFragment
+
+    @ScopeFragment
+    @ContributesAndroidInjector
+    internal abstract fun bindAddTodoFragmentBottomSheet(): AddTodoFragmentBottomSheet
 }

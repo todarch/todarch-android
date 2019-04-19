@@ -16,11 +16,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_size"
             android:text="@string/save"
-            app:layout_constraintBottom_toTopOf="@+id/task_name"
+            app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/task_name"
+            android:id="@+id/title"
             style="@style/Text.Title"
             android:layout_marginStart="@dimen/normal_size"
             android:layout_marginEnd="@dimen/normal_size"

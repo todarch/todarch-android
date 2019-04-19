@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ADD_TODO -->
+    <!-- TODO_LIST -->
+    <string name="empty_no_data_tasks">Start adding a Todo</string>
+    <string name="error_getting_tasks">Ups sorry, \n there is an error while getting tasks</string>
+
+    <!-- ADD_TASK -->
     <string name="add_todo">add todo</string>
     <string name="new_todo">New Todo</string>
     <string name="save">Save</string>
+    <string name="error_invalid_task_title">Please enter a valid title</string>
 
     <!-- LOGIN -->
     <string name="email">Email</string>

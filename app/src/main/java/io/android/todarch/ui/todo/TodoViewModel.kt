@@ -29,5 +29,9 @@ class TodoViewModel @Inject constructor(
     private val tasksRepository: TasksRepository
 ) : ViewModel() {
 
-    fun isNotLoggedIn() = !session.isLoggedIn
+    fun isNotLoggedIn(): Boolean = !session.isLoggedIn
+
+    fun saveTask(title: String) {
+        // TODO implement save task
+    }
 }
