@@ -106,7 +106,7 @@ class TodoApiModule {
     }
 
     companion object {
-        private const val TIMEOUT_SECOND: Long = 30
+        private const val TIMEOUT_SECOND: Long = 15
         private const val NAMED_TODARCH: String = "todarch"
     }
 }
