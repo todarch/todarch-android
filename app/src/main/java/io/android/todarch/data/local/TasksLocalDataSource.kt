@@ -42,32 +42,24 @@ class TasksLocalDataSource @Inject constructor(private val tasksDao: TasksDao) :
     }
 
     @WorkerThread
-    override suspend fun saveTask(task: Task) {
-        tasksDao.insertTask(task)
-    }
+    override suspend fun saveTask(task: Task) = tasksDao.insertTask(task)
 
     @WorkerThread
-    override suspend fun updateTask(task: Task): Result<Int> {
-        return Result.Success(tasksDao.updateTask(task))
-    }
+    override suspend fun updateTask(task: Task): Result<Int> =
+            Result.Success(tasksDao.updateTask(task))
 
     @WorkerThread
-    override suspend fun updateCompleted(taskId: String, completed: Boolean) {
-        tasksDao.updateCompleted(taskId, completed)
-    }
+    override suspend fun updateCompleted(taskId: String, completed: Boolean) =
+            tasksDao.updateCompleted(taskId, completed)
 
     @WorkerThread
-    override suspend fun deleteTaskById(taskId: String): Result<Int> {
-        return Result.Success(tasksDao.deleteTaskById(taskId))
-    }
+    override suspend fun deleteTaskById(taskId: String): Result<Int> =
+            Result.Success(tasksDao.deleteTaskById(taskId))
 
     @WorkerThread
-    override suspend fun deleteCompletedTasks(): Result<Int> {
-        return Result.Success(tasksDao.deleteCompletedTasks())
-    }
+    override suspend fun deleteCompletedTasks(): Result<Int> =
+            Result.Success(tasksDao.deleteCompletedTasks())
 
     @WorkerThread
-    override suspend fun deleteAllTasks() {
-        tasksDao.deleteTasks()
-    }
+    override suspend fun deleteAllTasks() = tasksDao.deleteTasks()
 }
