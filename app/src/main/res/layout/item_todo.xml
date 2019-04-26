@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="@dimen/normal_size">
+
+		<TextView
+			android:id="@+id/title"
+			style="@style/TextAppearance.AppCompat.Title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="2"
+			android:textColor="@color/black"
+			tools:text="Don't forget to run Don't forget to run Don't forget to run Don't forget to
+			run Don't forget to run"
+			tools:ignore="MissingConstraints"/>
+
+		<TextView
+			android:id="@+id/timeNeededInDuration"
+			style="@style/TextAppearance.AppCompat.Small"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:singleLine="true"
+			android:visibility="invisible"
+			app:layout_constraintTop_toBottomOf="@+id/title"
+			tools:text="2 days 10 hours left"
+			tools:visibility="visible"/>
+
+		<com.google.android.material.chip.Chip
+			android:id="@+id/tags"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:visibility="gone"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/timeNeededInDuration"
+			tools:text="Personal"
+			tools:visibility="visible"/>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
