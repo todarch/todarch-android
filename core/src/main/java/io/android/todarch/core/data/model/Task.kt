@@ -29,7 +29,7 @@ data class Task @JvmOverloads constructor(
     @PrimaryKey
     @ColumnInfo(name = "id")
     @SerializedName("id")
-    val id: String,
+    var id: String,
 
     @ColumnInfo(name = "title")
     @SerializedName("title")

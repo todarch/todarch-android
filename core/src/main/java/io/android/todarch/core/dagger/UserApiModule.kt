@@ -88,7 +88,7 @@ class UserApiModule {
     internal fun provideHttpInterceptors(): Array<Interceptor>? = null
 
     companion object {
-        const val TIMEOUT_SECOND: Long = 30
+        const val TIMEOUT_SECOND: Long = 15
         const val NAMED_USER: String = "user"
     }
 }

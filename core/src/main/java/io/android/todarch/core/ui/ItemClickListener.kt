@@ -13,29 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.android.todarch.user.ui
-
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import io.android.todarch.core.base.BaseActivity
-import io.android.todarch.user.R
+package io.android.todarch.core.ui
 
 /**
  * @author Melih Gültekin <mmelihgultekin@gmail.com>
- * @since 2.11.2018.
+ * @since 1.12.2018.
  */
-class UserManagementActivity : BaseActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_management)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    companion object {
-        fun newIntent(context: Context): Intent =
-            Intent(context, UserManagementActivity::class.java)
-    }
+interface ItemClickListener<in T : Any> {
+    fun onItemClick(item: T)
 }
