@@ -64,8 +64,8 @@ class TodoViewModel @Inject constructor(
 		getAllTasks()
 	}
 
-	fun saveTask(title: String) = launch(contextProvider.io) {
-		tasksRepository.saveTask(Task(System.currentTimeMillis().toString(), title))
+	fun saveTask(title: String, description: String, tags: List<String>) = launch(contextProvider.io) {
+		tasksRepository.saveTask(Task(System.currentTimeMillis().toString(), title, description, tags = tags))
 		loadTasks(false)
 		emitUiState(taskUpdated = Event(true))
 	}
