@@ -73,5 +73,5 @@ dependencies {
 
     // Room
     kapt "androidx.room:room-compiler:${versions.room}"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
 }
