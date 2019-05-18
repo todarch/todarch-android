@@ -1,33 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bottom_sheet"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:behavior_hideable="true"
-        app:layout_behavior="@string/bottom_sheet_behavior">
+	<LinearLayout
+		android:id="@+id/bottomSheet"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:elevation="4dp"
+		android:orientation="vertical"
+		tools:ignore="UnusedAttribute"
+		app:behavior_hideable="true"
+		app:layout_behavior="@string/bottom_sheet_behavior">
 
-        <Button
-            android:id="@+id/save"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_size"
-            android:text="@string/save"
-            app:layout_constraintBottom_toTopOf="@+id/title"
-            app:layout_constraintEnd_toEndOf="parent"/>
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/bottomSheetConstraintLayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:paddingStart="@dimen/normal_size"
+			android:paddingEnd="@dimen/normal_size"
+			android:paddingBottom="@dimen/normal_size">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/title"
-            style="@style/Text.Title"
-            android:layout_marginStart="@dimen/normal_size"
-            android:layout_marginEnd="@dimen/normal_size"
-            android:hint="@string/new_todo"
-            android:paddingBottom="@dimen/large_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+			<ImageButton
+				android:id="@+id/up"
+				style="@style/Widget.AppCompat.Button.Borderless"
+				android:layout_width="80dp"
+				android:layout_height="0dp"
+				android:background="@android:color/transparent"
+				android:src="@drawable/ic_expand_less_24dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:ignore="ContentDescription"/>
+
+			<Button
+				android:id="@+id/save"
+				style="@style/Widget.MaterialComponents.Button.TextButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/save"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"/>
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/title"
+				style="@style/Text.BottomSheet.TextInputLayout"
+				android:layout_marginTop="@dimen/min_size"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/up">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/edit_text_title"
+					style="@style/Text.BottomSheet.EditText"
+					android:hint="@string/new_todo"
+					android:imeOptions="actionNext"
+					android:maxLines="1"
+					android:singleLine="true"/>
+
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<androidx.constraintlayout.widget.Group
+				android:id="@+id/groupMore"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:visibility="gone"
+				app:constraint_referenced_ids="description, tags, chipGroup"
+				tools:visibility="visible"/>
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/description"
+				style="@style/Text.BottomSheet.TextInputLayout"
+				android:layout_marginTop="@dimen/normal_size"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/title">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/edit_text_description"
+					style="@style/Text.BottomSheet.EditText"
+					android:gravity="top"
+					android:hint="@string/description"
+					android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+					android:minLines="3"
+					android:singleLine="false"/>
+
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/tags"
+				style="@style/Text.BottomSheet.TextInputLayout"
+				android:layout_marginTop="@dimen/min_size"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/description">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/edit_text_tags"
+					style="@style/Text.BottomSheet.EditText"
+					android:hint="@string/tag"
+					android:imeOptions="actionDone"
+					android:maxLines="1"
+					android:singleLine="true"
+					android:textSize="12sp"/>
+
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<com.google.android.material.chip.ChipGroup
+				android:id="@+id/chipGroup"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_marginTop="@dimen/normal_size"
+				app:layout_constraintTop_toBottomOf="@+id/tags">
+
+				<com.google.android.material.chip.Chip
+					style="@style/Widget.MaterialComponents.Chip.Entry"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:checkable="false"
+					android:clickable="true"
+					android:focusable="true"
+					android:visibility="gone"
+					app:chipIconEnabled="false"
+					tools:text="android"
+					tools:visibility="visible"/>
+			</com.google.android.material.chip.ChipGroup>
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</LinearLayout>
 </layout>

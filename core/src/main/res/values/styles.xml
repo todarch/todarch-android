@@ -42,8 +42,16 @@
     <style name="Text.Title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@android:color/transparent</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:inputType">text</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Text.Description">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Text.Form" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -61,6 +69,22 @@
     <style name="Text.Form.Password">
         <item name="android:hint">@string/password</item>
         <item name="android:inputType">textPassword</item>
+    </style>
+
+    <style name="Text.BottomSheet">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Text.BottomSheet.TextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="Text.BottomSheet.EditText">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:inputType">text</item>
     </style>
 
     <style name="Button">
