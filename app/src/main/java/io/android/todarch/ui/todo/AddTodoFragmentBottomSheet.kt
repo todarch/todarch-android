@@ -19,7 +19,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -156,7 +155,6 @@ class AddTodoFragmentBottomSheet : BottomSheetDialogFragment(), View.OnClickList
         for (i in 0 until size) {
             val chip = binding.chipGroup.getChildAt(i) as Chip
             tags.add(chip.text.toString())
-            Log.d("melo", chip.text.toString())
         }
         return tags
     }
